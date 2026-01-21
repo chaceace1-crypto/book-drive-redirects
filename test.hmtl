@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting…</title>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SKHZVP410R');
+
+    gtag('event', 'redirect_click', {
+      link_name: 'TEST',
+      utm_source: 'vivaengage',
+      utm_medium: 'test',
+      utm_content: 'test'
+    });
+
+    setTimeout(function () {
+      window.location.replace(
+        "https://www.amazon.com/registries/gl/guest-view/ZDTUNIPEUK0?ref_=cm_sw_r_cp_ud_ggr-subnav-share_GTT5V75QEEEWKRM70GW3_1&utm_source=vivaengage&utm_medium=test&utm_campaign=s6b&utm_term=google-analytics&utm_content=test"
+      );
+    }, 1000);
+  </script>
+</head>
+<body>
+  <p>Redirecting…</p>
+</body>
+</html>
