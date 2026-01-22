@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Redirecting…</title>
+
+  <!-- GA4 Global Site Tag -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKHZVP410R"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SKHZVP410R');
+  </script>
+
+  <script>
+    // Base Amazon destination
+    const destinationBase =
+      "https://www.amazon.com/registries/gl/owner-view/ZDTUNIPEUK0?ref_=gr_universal_landing_ggr";
+
+    // Capture UTM parameters from current URL
+    const params = new URLSearchParams(window.location.search);
+    const utms = new URLSearchParams();
+
+    ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"]
+      .forEach(key => {
+        if (params.has(key)) {
+          utms.set(key, params.get(key));
+        }
+      });
+
+    // Build final redirect URL
+    const redirectUrl = utms.toString()
+      ? destinationBase + "&" + utms.toString()
+      : destinationBase;
+
+    // Redirect after 1000ms
+    setTimeout(() => {
+      window.location.replace(redirectUrl);
+    }, 1000);
+  </script>
+</head>
+
+<body>
+  <p>Redirecting you…</p>
+</body>
+</html>
