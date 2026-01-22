@@ -1,30 +1,56 @@
-<script>
-  const AMAZON_URL =
-    "https://www.amazon.com/registries/gl/guest-view/ZDTUNIPEUK0?ref_=cm_sw_r_cp_ud_ggr-subnav-share_023JZ5HMZA5EQF5X58K7_1";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting…</title>
 
-  const params = new URLSearchParams(window.location.search);
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKHZVP410R"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
 
-  // Force GA4 to register the page view WITH UTMs
-  gtag('event', 'page_view', {
-    page_location: window.location.href,
-    page_referrer: document.referrer
-  });
+    gtag('js', new Date());
 
-  // Build redirect URL with UTMs preserved
-  const utmParams = new URLSearchParams();
-  ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"]
-    .forEach(key => {
-      if (params.has(key)) {
-        utmParams.set(key, params.get(key));
+    // IMPORTANT: disable automatic page_view
+    gtag('config', 'G-SKHZVP410R', {
+      send_page_view: false
+    });
+
+    const AMAZON_URL =
+      "https://www.amazon.com/registries/gl/guest-view/ZDTUNIPEUK0?ref_=cm_sw_r_cp_ud_ggr-subnav-share_023JZ5HMZA5EQF5X58K7_1";
+
+    const params = new URLSearchParams(window.location.search);
+    const utmParams = new URLSearchParams();
+
+    ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"]
+      .forEach(key => {
+        if (params.has(key)) {
+          utmParams.set(key, params.get(key));
+        }
+      });
+
+    const redirectUrl = utmParams.toString()
+      ? AMAZON_URL + "&" + utmParams.toString()
+      : AMAZON_URL;
+
+    // Manually fire page_view and WAIT for GA to send it
+    gtag('event', 'page_view', {
+      page_location: window.location.href,
+      page_referrer: document.referrer,
+      event_callback: function () {
+        window.location.replace(redirectUrl);
       }
     });
 
-  const redirectUrl = utmParams.toString()
-    ? AMAZON_URL + "&" + utmParams.toString()
-    : AMAZON_URL;
+    // Absolute fallback (GA sometimes never calls callback)
+    setTimeout(() => {
+      window.location.replace(redirectUrl);
+    }, 3000);
+  </script>
+</head>
 
-  // Give GA time to lock the session
-  setTimeout(() => {
-    window.location.replace(redirectUrl);
-  }, 1800);
-</script>
+<body>
+  <p>Redirecting…</p>
+</body>
+</html>
