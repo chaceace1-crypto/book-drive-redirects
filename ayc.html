@@ -1,32 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Redirecting…</title>
+  <meta charset="UTF-8" />
+  <title>AYC Redirect</title>
 
-  <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKHZVP410R"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-SKHZVP410R');
-
-    gtag('event', 'redirect_click', {
-      link_name: 'AYC',
-      utm_source: 'vivaengage',
-      utm_medium: 'AYC',
-      utm_content: 'vea3'
-    });
-
-    setTimeout(function () {
-      window.location.replace(
-        "https://www.amazon.com/registries/gl/guest-view/ZDTUNIPEUK0?ref_=cm_sw_r_cp_ud_ggr-subnav-share_GTT5V75QEEEWKRM70GW3_1&utm_source=vivaengage&utm_medium=AYC&utm_campaign=s6b&utm_term=google-analytics&utm_content=vea3"
-      );
-    }, 1000);
   </script>
 </head>
 <body>
-  <p>Redirecting…</p>
+<script>
+  const params = new URLSearchParams(window.location.search);
+
+  const utm_source   = params.get('utm_source');
+  const utm_medium   = params.get('utm_medium');
+  const utm_campaign = params.get('utm_campaign');
+  const utm_content  = params.get('utm_content');
+
+  const redirectUrl = "https://www.amazon.com/registries/gl/guest-view/ZDTUNIPEUK0?ref_=cm_sw_r_cp_ud_ggr-subnav-share_GTT5V75QEEEWKRM70GW3_1";
+
+  gtag('event', 'redirect_click', {
+    utm_source: utm_source,
+    utm_medium: utm_medium,
+    utm_campaign: utm_campaign,
+    utm_content: utm_content,
+    link_name: 'ayc'
+  });
+
+  setTimeout(() => {
+    window.location.href = redirectUrl;
+  }, 1000);
+</script>
 </body>
 </html>
