@@ -17,27 +17,6 @@
     const AMAZON_URL =
       "https://www.amazon.com/registries/gl/guest-view/ZDTUNIPEUK0?ref_=cm_sw_r_cp_ud_ggr-subnav-share_023JZ5HMZA5EQF5X58K7";
 
-    // Capture UTM parameters
-    const params = new URLSearchParams(window.location.search);
-    const utmParams = new URLSearchParams();
-
-    ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"]
-      .forEach(key => {
-        if (params.has(key)) {
-          utmParams.set(key, params.get(key));
-        }
-      });
-
-    const redirectUrl = utmParams.toString()
-      ? AMAZON_URL + "&" + utmParams.toString()
-      : AMAZON_URL;
-
-    // Fire an explicit page_view with full URL
-    gtag('event', 'page_view', {
-      page_location: window.location.href,
-      page_referrer: document.referrer
-    });
-
     // Redirect after 1000ms
     setTimeout(() => {
       window.location.replace(redirectUrl);
