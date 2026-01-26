@@ -7,21 +7,27 @@
   <!-- GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKHZVP410R"></script>
   <script>
+    // Initialize dataLayer and gtag function
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
 
-    // Initialize GA4 (auto pageview fires here)
+    // Force debug_mode to true cross-browser
+    gtag('set', 'debug_mode', true);
+
+    // Initialize GA4
     gtag('js', new Date());
-    gtag('set', 'debug_mode', true); // optional for DebugView
     gtag('config', 'G-SKHZVP410R');
 
-    // Amazon wishlist URL (no UTM parameters)
+    // Amazon wishlist URL (static, no UTM transfer)
     const AMAZON_URL = "https://www.amazon.com/registries/gl/guest-view/ZDTUNIPEUK0?ref_=cm_sw_r_cp_ud_ggr-subnav-share_023JZ5HMZA5EQF5X58K7";
 
-    // Redirect after 1000ms
+    // Redirect after 1 second (1000ms)
     setTimeout(() => {
       window.location.replace(AMAZON_URL);
     }, 1000);
+
+    // Optional: log to console to verify in all browsers
+    console.log("Redirect page loaded — GA4 pageview should fire in DebugView.");
   </script>
 </head>
 
